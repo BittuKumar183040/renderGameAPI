@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Games. Random</title>
+    <style>
+        body{
+            margin: 0;
+            overflow-x: hidden;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+            display: inline-block;
+        }
+        .topCircle{
+            position:absolute;
+            top:-25px;
+            left:-25px;
+            height:50px;
+            width:50px;
+            cursor: pointer;
+            border-radius: 50%;
+            border:0px solid transparent;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: circle 1s infinite alternate ease-in-out;
+        }
+        @keyframes circle {
+            to{
+                border:4px solid rgb(134, 134, 134);
+            }
+            
+        }
+        .expand{
+            animation: expanded 1s 1 alternate ease;
+        }
+        @keyframes expanded {
+            0%{
+                transform: scale(1);
+            }
+            50%{
+                background:rgb(134, 134, 134);
+                transform: scale(100);
+                border-color: transparent;
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+        .thanking
+        {
+            margin-left:40px;
+            font-size:18px;
+        }
+        .alternate{
+            background-color: rgb(234, 234, 234);
+            padding:10px 0;
+            box-shadow:-40px 0 0px rgb(234, 234, 234); 
+            margin:20px 0;   
+        }
+        #heading{
+            color: rgba(0,0,0,0.8);
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.6),
+            2px 2px 1px rgba(0,0,0,0.6);
+        }
+        #heading span{
+            color:rgb(134, 134, 134);
+        }
+        .syntax{
+            padding:10px;
+            border: 2px solid black;
+            min-width:150px;
+            max-width: fit-content;
+            font-size: 18px;
+            box-shadow: 1px 1px 0 rgba(0,0,0,0.6),
+            2px 2px 0 rgba(0,0,0,0.6);
+            white-space: nowrap;
+        }
+        .note{
+            background:rgba(0,0,0,0.1);
+            padding:5px;
+            color:rgb(63, 63, 63);
+            font-weight: bold;
+            min-width: 50%;
+            max-width: fit-content;
+            border-radius: 5px;
+        }
+        .instruction{
+            background-color: rgb(39, 39, 39);
+            color:white;
+            padding:10px 40px;
+            box-shadow: 1px 1px 0 rgba(0,0,0,0.6),
+            2px 2px 0 rgba(0,0,0,0.6);
+        }
+        footer{
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            width: 100vw;
+            bottom: 0px;
+            background-color: rgb(112, 112, 112);
+            color:white;
+            font-size: 11px;
+        }
+        footer *{
+            padding:0 40px;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="topCircle" onclick="themeChange(this)"></div>
+    <div>
+        <h1 id="heading" align="center">Get Game<span>.</span> Random</h1>
+    </div>
+    <div class="dataContainer">
+        <div class="thanking">
+            <p>Thanks for Visiting my API to get games details...</p>
+            <p>To work with this API, use following syntax and procedure, Thanks!</p>
+        </div>
+        <hr>
+        <ul>
+            <div class="alternate">
+                <li>To get Random games details in a particular year</li>
+                <a href="https://gamesdataapi.herokuapp.com/2022/random">
+                    <p class="syntax">gamesdataapi.herokuapp.com/2022/random</p>
+                </a>
+    
+                <li>To get Random games details from our whole collection</li>
+                <a href="https://gamesdataapi.herokuapp.com/random">
+                    <p class="syntax">gamesdataapi.herokuapp.com/random/</p>
+                </a>
+            </div>
+            <div>
+                <li> To get the complete games data of whole year</li>
+                <a href="https://gamesdataapi.herokuapp.com/2021">
+                    <p class="syntax">gamesdataapi.herokuapp.com/{YEAR}</p>
+                </a>
+                <li>Search by title and year the game is released by using following syntax</li>
+                <a href="">
+                    <p class="syntax">gamesdataapi.herokuapp.com/find?title={GAMENAME}&year={YEAR}</p>
+                </a>
+                <p class="note">By default year is set to 2021 if not provided</p>
+            </div>
+            <div class="alternate">
+                <h2>Want to contribute! <span style="font-weight:lighter;color:rgba(0,0,0,0.8)">Provide us missing game information</span></h2>
+                <h4>We will add after review your submission...</h4>
+                <p class="note">Visit below route to get contribution form</p>
+                <a href="https://gamesdataapi.herokuapp.com/user/submit_page">
+                    <p class="syntax">gamesdataapi.herokuapp.com/user/submit_page</p>
+                </a>
+            </div>
+        </ul>
+        <div class="instruction">
+            <p>replace "{YEAR}" with actual year in YYYY format like 2022, 2021...</p>
+            <p>Note - year must be 2000 or more than that...</p>
+        </div>
+    </div>
+    <br><br><br>
+    <footer>
+        <p>MentorKart Capstones Project 1 (Basic API Creating)</p>
+        <p>Bittu Kumar</p>
+    </footer>
+    <script>
+        function themeChange(e){
+            const bodyStyle=document.body.style
+            let ft=document.body.style
+            e.style.top="-40px";
+            e.style.left="-20px";
+            if(ft.filter === "invert()")
+            {
+                ft.filter="invert(0%)"
+                bodyStyle.background="rgba(255,255,255,1)"
+                e.classList.remove("expand")
+                return
+            }
+            bodyStyle.background="rgba(0,0,0,9)"
+            e.classList.add("expand")
+            ft.filter="invert()"
+
+        };
+    </script>
+</body>
+</html>
